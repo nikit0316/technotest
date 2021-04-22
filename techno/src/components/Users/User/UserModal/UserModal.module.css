@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+.modal{
+    background: rgba(63, 51, 86, 0.4);
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 15;
+}
+
+.modalWindow{
+    position: fixed;
+    width: 916px;
+    height: 573px;
+    left: 262px;
+    top: 225px;
+    z-index: 999;
+
+    background: #FFFFFF;
+    /* Dropshadow 1 */
+
+    box-shadow: 0px 7px 64px rgba(0, 0, 0, 0.07);
+    border-radius: 12px;
+}
+
+.modalHeader{
+    width: 916px;
+    height: 61px;
+    align-items: center;
+}
+
+.modalName{
+    position: absolute;
+    height: 41px;
+    left: 34px;
+    right: 939px;
+    top: 20px;
+    width: 500px;
+
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 34px;
+    line-height: 41px;
+    /* identical to box height, or 121% */
+
+    display: flex;
+    align-items: center;
+
+    color: #000000;
+}
+
+.removeDiv {
+    position: absolute;
+    height: 42px;
+    width: 42px;
+    left: 852px;
+    right: 284px;
+    top: 20px;
+}
+
+.removeDiv img {
+    position: absolute;
+    left: 17px;
+    top: 17px;
+}
+
+.line{
+    position: absolute;
+    width: 916px;
+    height: 0px;
+    top: 80px;
+
+    /* Color/Neutral/4 - Grey 25% */
+
+    border: 1px solid #ECEBED;
+}
+
+.button{
+    position: absolute;
+    width: 180px;
+    height: 40px;
+    top: 511px;
+    left: 714px;
+
+    background: #6979F8;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    border-radius: 6px;
+}
+
+.button text{
+    margin-left: 55px;
+}
+
+.modalText{
+    position: absolute;
+    width: 240px;
+    height: 48px;
+    margin-top: 34px;
+    margin-left: 34px;
+
+
+    /* Color/Neutral/6 - White */
+
+    background: #FFFFFF;
+    /* Color/Neutral/4 - Grey 25% */
+
+    border: 1px solid #ECEBED;
+    box-sizing: border-box;
+    /* Dropshadow 1 */
+
+    box-shadow: 0px 7px 64px rgba(0, 0, 0, 0.07);
+    border-radius: 6px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 20px;
+    /* identical to box height, or 133% */
+
+    display: flex;
+    align-items: center;
+
+    /* Color/Neutral/1 - Dark */
+
+    color: #1A051D;
+}
+
+.modalText text{
+    margin-left: 16px;
+}
+
+.statusDropDown{
+    position: relative;
+    width: 240px;
+    height: 48px;
+    margin-top: 110px;
+    margin-left: 34px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 20px;
+    align-items: center;
+    color: #3F3356;
+    background: #FFFFFF;
+    box-shadow: 0px 7px 64px rgba(0, 0, 0, 0.07);
+    border-radius: 6px;
+}
+
+.statusDropDown text{
+    position: absolute;
+    margin-left: 16px;
+    padding-top: 14px;
+}
+
+.path{
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    right: 16px;
+    top: calc(50% - 16px/2);
+}
+
+.path img{
+    position: absolute;
+    left: 19.84%;
+    right: 19.84%;
+    top: 31.25%;
+    bottom: 28.35%;
+}

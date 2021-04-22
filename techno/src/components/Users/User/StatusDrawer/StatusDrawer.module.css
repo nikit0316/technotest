@@ -1,0 +1,22 @@
+
+.statusChosen{
+    position: relative;
+    width: 208px;
+    height: 20px;
+    left: 16px;
+    margin-top: 16px;
+
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 20px;
+    /* identical to box height, or 133% */
+
+    display: flex;
+    align-items: center;
+
+    /* Color/Neutral/2 - Grey */
+
+    color: #D0C9D6;
+}
