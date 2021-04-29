@@ -1,33 +1,32 @@
 import React from "react";
 import User from "./User/User";
 import axios from "axios";
+import {useEffect, useState} from "react";
 
-class UsersList extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            userData: null,
-            displayThing: 'none'
-        };
-    }
+function UsersList (props) {
+       const [userData,setUserData] = useState(null);
 
-    async componentDidMount() {
-       await axios.get('https://watchlater.cloud.technokratos.com/get/array').then(response => {
-           this.setState({
-                userData: response.data.map(item => {
-                    return(
+    useEffect(() => {
+        async function getData() {
+           await axios.get('https://watchlater.cloud.technokratos.com/get/array').then(response => {
+                setUserData(response.data.map(item => {
+                        return (
                             <div id='reminder'>
-                                <User name={item.name} fname={item.fname} mname={item.mname} status={item.status} lastUpdatedAt={item.lastUpdatedAt} avatar={item.avatar} balance={item.balance}/>
+                                <User name={item.name} fname={item.fname} mname={item.mname} status={item.status}
+                                      lastUpdatedAt={item.lastUpdatedAt} avatar={item.avatar} balance={item.balance}/>
                             </div>
-                    )
-                })
-           })
-       })
-    };
+                        )
+                    })
+                )
+            })
+        }
 
-    render() {
-        return this.state.userData;
-    }
+        getData();
+    },[]);
+
+
+        return userData;
+
 }
 
 export default UsersList;
