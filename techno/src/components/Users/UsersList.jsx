@@ -3,12 +3,12 @@ import User from "./User/User";
 import axios from "axios";
 import {useEffect, useState} from "react";
 
-function UsersList (props) {
-       const [userData,setUserData] = useState(null);
+function UsersList(props) {
+    const [userData, setUserData] = useState(null);
 
     useEffect(() => {
         async function getData() {
-           await axios.get('https://watchlater.cloud.technokratos.com/get/array').then(response => {
+            await axios.get('https://watchlater.cloud.technokratos.com/get/array').then(response => {
                 setUserData(response.data.map(item => {
                         return (
                             <div id='reminder'>
@@ -22,11 +22,8 @@ function UsersList (props) {
         }
 
         getData();
-    },[]);
-
-
-        return userData;
-
+    }, []);
+    return userData;
 }
 
 export default UsersList;

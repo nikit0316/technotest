@@ -6,8 +6,8 @@ export default function StatusDrawer(props) {
     const styleBlock = {
         display: 'block',
         position: 'absolute',
-        left: props.coordX.toString()+'px',
-        top: (props.coordY+22).toString()+'px',
+        left: props.coordX.toString() + 'px',
+        top: (props.coordY + 22).toString() + 'px',
         width: '193px',
         height: '124px',
         background: '#FFFFFF',
@@ -16,6 +16,7 @@ export default function StatusDrawer(props) {
         padding: '12px 16px',
         zIndex: 9999
     }
+
     const window = (
         <div style={styleBlock}>
             <div className={styles.statusChosen} style={{color: statusCode === 0 && '#3F3356'}}>Приостановлена</div>
@@ -23,7 +24,8 @@ export default function StatusDrawer(props) {
             <div className={styles.statusChosen} style={{color: statusCode === 2 && '#3F3356'}}>Заблокирован</div>
         </div>
     )
-    return(
+
+    return (
         window
     )
 }

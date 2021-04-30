@@ -1,11 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./User.module.css";
 import Portal from "../../Portal/Portal";
 import StatusDrawer from "./StatusDrawer/StatusDrawer";
 import UserModal from "./UserModal/UserModal";
 
-class User extends React.Component {
-    constructor(props) {
+function User(props) {
+    /*constructor(props) {
         super(props);
         this.state = {
             coordsX: null,
@@ -21,48 +21,51 @@ class User extends React.Component {
             balance: props.balance
         }
         this.handleClick = this.handleClick.bind(this);
+    }*/
+
+    const [coordsX, setCoordsX] = useState(null);
+    const [coordsY, setCoordsY] = useState(null);
+    const [dropdownOn, setDropdownOn] = useState(false);
+    const [modalOn, setModalOn] = useState(false);
+
+    function handleClick() {
+        setModalOn(!modalOn);
     }
 
-    handleClick() {
-        this.setState({modalOn: !this.state.modalOn});
-    }
-
-    render() {
-        return (
-            <div className={styles.window}>
-                <img className={styles.image} src={getAvatar(this.state.avatar)}/>
-                <a onClick={(e) => {
-                    this.handleClick()
-                }} className={styles.userName}>{this.state.fname} {this.state.name[0]}. {this.state.mname[0]}.</a>
-                <a className={styles.balance}>Баланс: {numFormat(this.state.balance.toFixed(2))}</a>
-                <a className={styles.time}>{getTime(this.state.lastUpdatedAt)}</a>
-                <div onClick={e => {
-                    const rect = e.target.getBoundingClientRect();
-                    this.setState({
-                        coordsX: rect.x,
-                        coordsY: rect.y + window.scrollY,
-                        dropdownOn: !this.state.dropdownOn
-                    })
-                }} className={styles.statusDropDown}>{getStatus(this.state.status)}
-                    {
-                        this.state.dropdownOn &&
-                        <Portal>
-                            <StatusDrawer status={this.state.status} coordX={this.state.coordsX}
-                                          coordY={this.state.coordsY}/>
-                        </Portal>
-                    }
-                    <a className={styles.path}><img src={'/path.png'}/></a>
-                </div>
+    return (
+        <div className={styles.window}>
+            <img className={styles.image} src={getAvatar(props.avatar)}/>
+            <a onClick={(e) => {
+                handleClick()
+            }} className={styles.userName}>{props.fname} {props.name[0]}. {props.mname[0]}.</a>
+            <a className={styles.balance}>Баланс: {numFormat(props.balance.toFixed(2))}</a>
+            <a className={styles.time}>{getTime(props.lastUpdatedAt)}</a>
+            <div onClick={e => {
+                const rect = e.target.getBoundingClientRect();
                 {
-                    this.state.modalOn &&
+                    setCoordsX(rect.x);
+                    setCoordsY(rect.y + window.scrollY);
+                    setDropdownOn(!dropdownOn);
+                }
+            }} className={styles.statusDropDown}>{getStatus(props.status)}
+                {
+                    dropdownOn &&
                     <Portal>
-                        <UserModal handleClick={this.handleClick} name={this.state.name} fname={this.state.fname}
-                                   mname={this.state.mname} status={this.state.status}/>
+                        <StatusDrawer status={props.status} coordX={coordsX}
+                                      coordY={coordsY}/>
                     </Portal>
                 }
+                <a className={styles.path}><img src={'/path.png'}/></a>
             </div>
-        )
-    }
+            {
+                modalOn &&
+                <Portal>
+                    <UserModal handleClick={handleClick} name={props.name} fname={props.fname}
+                               mname={props.mname} status={props.status}/>
+                </Portal>
+            }
+        </div>
+    )
 }
 
 function getTime(time) {
