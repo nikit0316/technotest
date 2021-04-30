@@ -3,6 +3,7 @@ import styles from "./User.module.css";
 import Portal from "../../Portal/Portal";
 import StatusDrawer from "./StatusDrawer/StatusDrawer";
 import UserModal from "./UserModal/UserModal";
+import {getAvatar, getStatus, getTime, numFormat} from "./UserUtils";
 
 function User(props) {
     /*constructor(props) {
@@ -12,17 +13,17 @@ function User(props) {
             coordsY: null,
             dropdownOn: false,
             modalOn: false,
-            avatar: props.avatar,
-            name: props.name,
-            fname: props.fname,
-            mname: props.mname,
-            status: props.status,
-            lastUpdatedAt: props.lastUpdatedAt,
-            balance: props.balance
+            avatar: avatar,
+            name: name,
+            fname: fname,
+            mname: mname,
+            status: status,
+            lastUpdatedAt: lastUpdatedAt,
+            balance: balance
         }
         this.handleClick = this.handleClick.bind(this);
     }*/
-
+    let {name,fname,mname,balance,lastUpdatedAt,status,avatar} = props;
     const [coordsX, setCoordsX] = useState(null);
     const [coordsY, setCoordsY] = useState(null);
     const [dropdownOn, setDropdownOn] = useState(false);
@@ -34,12 +35,12 @@ function User(props) {
 
     return (
         <div className={styles.window}>
-            <img className={styles.image} src={getAvatar(props.avatar)}/>
+            <img className={styles.image} src={getAvatar(avatar)}/>
             <a onClick={(e) => {
                 handleClick()
-            }} className={styles.userName}>{props.fname} {props.name[0]}. {props.mname[0]}.</a>
-            <a className={styles.balance}>Баланс: {numFormat(props.balance.toFixed(2))}</a>
-            <a className={styles.time}>{getTime(props.lastUpdatedAt)}</a>
+            }} className={styles.userName}>{fname} {name[0]}. {mname[0]}.</a>
+            <a className={styles.balance}>Баланс: {numFormat(balance.toFixed(2))}</a>
+            <a className={styles.time}>{getTime(lastUpdatedAt)}</a>
             <div onClick={e => {
                 const rect = e.target.getBoundingClientRect();
                 {
@@ -47,11 +48,11 @@ function User(props) {
                     setCoordsY(rect.y + window.scrollY);
                     setDropdownOn(!dropdownOn);
                 }
-            }} className={styles.statusDropDown}>{getStatus(props.status)}
+            }} className={styles.statusDropDown}>{getStatus(status)}
                 {
                     dropdownOn &&
                     <Portal>
-                        <StatusDrawer status={props.status} coordX={coordsX}
+                        <StatusDrawer status={status} coordX={coordsX}
                                       coordY={coordsY}/>
                     </Portal>
                 }
@@ -60,58 +61,12 @@ function User(props) {
             {
                 modalOn &&
                 <Portal>
-                    <UserModal handleClick={handleClick} name={props.name} fname={props.fname}
-                               mname={props.mname} status={props.status}/>
+                    <UserModal handleClick={handleClick} name={name} fname={fname}
+                               mname={mname} status={status}/>
                 </Portal>
             }
         </div>
     )
-}
-
-function getTime(time) {
-    let currentTime = new Date();
-    let userTime = Date.parse(time);
-    let result = null;
-    userTime = new Date(userTime);
-    let timeDifferenceSeconds = Math.floor((currentTime - userTime) / (1000));
-    if (timeDifferenceSeconds < 60) {
-        result = 'Последнее изменение: ' + timeDifferenceSeconds + 'секунд назад';
-    } else if (timeDifferenceSeconds < 3600)//Не более 3-х дней
-    {
-        result = 'Последнее изменение: ' + timeDifferenceSeconds / (60) + 'минут назад';
-    } else if (timeDifferenceSeconds < 259200)//Не более 3-х дней
-    {
-        result = 'Последнее изменение: ' + timeDifferenceSeconds / (60 * 60 * 24) + 'дней назад';
-    } else result = 'Последнее изменение: ' + userTime.getDate() + '.' + (userTime.getMonth() + 1) + '.' + userTime.getFullYear() + ' ' + userTime.getHours() + ':' + userTime.getMinutes();
-    return result;
-}
-
-function getAvatar(src) {
-    let array = src.split('/');
-    let result = null;
-    if (array[1] === 'public') {
-        return '/' + array[2];
-    } else return src;
-}
-
-export function getStatus(statusCode) {
-    let result = null;
-    if (statusCode === 0)
-        result = 'Приостановлена';
-    else if (statusCode === 1)
-        result = 'Подписка активна';
-    else if (statusCode === 2)
-        result = 'Заблокирован';
-    return result;
-}
-
-function numFormat(balance) {
-    let digit = balance.split('.');
-    let lastDigits = digit[1];
-    digit = digit[0].split('').reverse().join('')
-        .match(/\d{0,3}/g).join(' ')
-        .split('').reverse().join('').trim();
-    return digit + '.' + lastDigits;
 }
 
 export default User;

@@ -2,23 +2,23 @@ import styles from './UserModal.module.css'
 import React, {useState} from "react";
 import Portal from "../../../Portal/Portal";
 import StatusDrawer from "../StatusDrawer/StatusDrawer";
-import {getStatus} from "../User";
+import {getStatus} from "../UserUtils";
 
 export default function UserModal(props) {
     /*constructor(props) {
         super(props);
-        this.handleClick = this.props.handleClick;
+        this.handleClick = this.handleClick;
         props = {
-            name: props.name,
-            fname: props.fname,
-            mname: props.mname,
-            status: props.status,
+            name: name,
+            fname: fname,
+            mname: mname,
+            status: status,
             isOn: false,
             coordsX: null,
             coordsY: null
         }
     }*/
-
+    let {name,fname,mname,status,handleClick }=props;
     const [coordsX, setCoordsX] = useState(null);
     const [coordsY, setCoordsY] = useState(null);
     const [dropdownOn, setDropdownOn] = useState(false);
@@ -27,9 +27,9 @@ export default function UserModal(props) {
         <div className={styles.modal}>
             <div className={styles.modalWindow}>
                 <div className={styles.modalHeader}>
-                    <div className={styles.modalName}>{props.fname + ' ' + props.name}</div>
+                    <div className={styles.modalName}>{fname + ' ' + name}</div>
                     <div className={styles.removeDiv} onClick={(e) => {
-                        props.handleClick()
+                        handleClick()
                     }}><img src={'remove.png'}/></div>
                     <div className={styles.line}/>
                 </div>
@@ -37,13 +37,13 @@ export default function UserModal(props) {
                     <text>Сохранить</text>
                 </div>
                 <div className={styles.modalText}>
-                    <text>{props.fname}</text>
+                    <text>{fname}</text>
                 </div>
                 <div className={styles.modalText} style={{marginLeft: '302px'}}>
-                    <text>{props.name}</text>
+                    <text>{name}</text>
                 </div>
                 <div className={styles.modalText} style={{marginLeft: '570px'}}>
-                    <text>{props.mname}</text>
+                    <text>{mname}</text>
                 </div>
                 <div onClick={e => {
                     const rect = e.target.getBoundingClientRect();
@@ -53,11 +53,11 @@ export default function UserModal(props) {
                         setDropdownOn(!dropdownOn);
                     }
                 }} className={styles.statusDropDown}>
-                    <text>{getStatus(props.status)}</text>
+                    <text>{getStatus(status)}</text>
                     {
                         dropdownOn &&
                         <Portal>
-                            <StatusDrawer status={props.status} coordX={coordsX}
+                            <StatusDrawer status={status} coordX={coordsX}
                                           coordY={coordsY}/>
                         </Portal>
                     }
