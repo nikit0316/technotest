@@ -11,7 +11,7 @@
     font-weight: normal;
     font-size: 15px;
     line-height: 20px;
-    /* identical to box height, or 133% */
+    /* identical to box height; or 133% */
 
     display: flex;
     align-items: center;
@@ -19,4 +19,16 @@
     /* Color/Neutral/2 - Grey */
 
     color: #D0C9D6;
+}
+
+.statusWindow{
+    display: block;
+    position: absolute;
+    width: 193px;
+    height: 124px;
+    background: #FFFFFF;
+    box-shadow: 0px 7px 64px rgba(0, 0, 0, 0.07);
+    border-radius: 6px;
+    padding: 12px 16px;
+    z-index: 9999;
 }
