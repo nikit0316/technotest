@@ -5,19 +5,6 @@ import StatusDrawer from "../StatusDrawer/StatusDrawer";
 import {getStatus} from "../UserUtils";
 
 export default function UserModal(props) {
-    /*constructor(props) {
-        super(props);
-        this.handleClick = this.handleClick;
-        props = {
-            name: name,
-            fname: fname,
-            mname: mname,
-            status: status,
-            isOn: false,
-            coordsX: null,
-            coordsY: null
-        }
-    }*/
     let {name,fname,mname,status,handleClick }=props;
     const [coordsX, setCoordsX] = useState(null);
     const [coordsY, setCoordsY] = useState(null);

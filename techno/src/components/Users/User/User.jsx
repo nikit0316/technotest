@@ -6,23 +6,6 @@ import UserModal from "./UserModal/UserModal";
 import {getAvatar, getStatus, getTime, numFormat} from "./UserUtils";
 
 function User(props) {
-    /*constructor(props) {
-        super(props);
-        this.state = {
-            coordsX: null,
-            coordsY: null,
-            dropdownOn: false,
-            modalOn: false,
-            avatar: avatar,
-            name: name,
-            fname: fname,
-            mname: mname,
-            status: status,
-            lastUpdatedAt: lastUpdatedAt,
-            balance: balance
-        }
-        this.handleClick = this.handleClick.bind(this);
-    }*/
     let {name,fname,mname,balance,lastUpdatedAt,status,avatar} = props;
     const [coordsX, setCoordsX] = useState(null);
     const [coordsY, setCoordsY] = useState(null);
